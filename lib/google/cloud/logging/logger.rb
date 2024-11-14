@@ -396,7 +396,9 @@ module Google
         def level= severity
           new_level = derive_severity severity
           if new_level.nil?
-            raise ArgumentError, "invalid log level: #{severity}"
+            # NOTE: 検証で、指定がない場合はunknownが入るようにする
+            #raise ArgumentError, "invalid log level: #{severity}"
+            new_level = ::Logger::UNKNOWN
           end
           @level = new_level
         end
